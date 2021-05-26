@@ -7,6 +7,7 @@ char * reverseParentheses(char * s){
     if(s==NULL)
         return s;
     int s_len = strlen(s);
+    // 注意加一，形如"ascd"的字符串strlen不包含结尾0
     char *res = (char *)malloc(s_len*sizeof(char)+1);
     char *tmp = res;
     Node n = {0,NULL,NULL};
@@ -24,6 +25,7 @@ char * reverseParentheses(char * s){
             }
             res[resIndex++] = *s++;
         }
+        // if判断先做结尾判断，形如"a(dfs)d"的案例
         if(*s!=0&&*s==')'){
             int i = tail->val;
             tail = tail->pre;
@@ -32,6 +34,7 @@ char * reverseParentheses(char * s){
             res[i] = res[resIndex-1];
             resIndex--;
             swap(res,i+1,resIndex-1);
+            // 放在if判断内部
             s++;
         }
     }
